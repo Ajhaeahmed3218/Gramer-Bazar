@@ -4,7 +4,7 @@ const Navbar = () => {
 
     const user = true;
     const navLink = <>
-        <li><NavLink to={"/"} className={({ isActive }) => isActive ? " border-2 border-none bg-[#bdcbf4] py-3 px-5 font-bold rounded-xl text-orange-600" : "font-bold py-3 px-5 lg:text-black "}>Home</NavLink></li>
+        <li><NavLink to={"/"} className={({ isActive }) => isActive ? " border-2 border-none bg-[#] py-3 px-5 font-bold rounded-xl text-orange-600 " : "font-bold py-3 px-5 lg:text-black "}>Home</NavLink></li>
 
         <li><NavLink to={"/membership"} className={({ isActive }) => isActive ? " border-2 border-none bg-[#bdcbf4]  py-3 px-5 font-bold rounded-xl" : "font-bold py-3 px-5 lg:text-bla"}>About</NavLink></li>
 
@@ -17,7 +17,7 @@ const Navbar = () => {
     </>
     return (
         <div>
-            <div className="navbar bg-base-100 lg:container mx-auto">
+            <div className="navbar bg-[#eeeeee] lg:container mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
