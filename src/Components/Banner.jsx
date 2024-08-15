@@ -1,7 +1,7 @@
 const Banner = () => {
     return (
         <div>
-            <div className="bg-[url('online-shop-banner.jpg')] bg-cover bg-center h-[80vh] ] w-full ]">
+            <div className="bg-[url('family.png')] bg-cover bg-center lg:h-[80vh] h-[50vh] ] w-full ]">
                 {/* Content goes here */}
             </div>
         </div>

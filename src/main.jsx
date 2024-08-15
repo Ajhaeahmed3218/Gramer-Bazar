@@ -9,12 +9,17 @@ import {
 } from "react-router-dom";
 import MainLayout from './Layout/MainLayout.jsx';
 import Home from './Pages/Home.jsx';
+import Register from './Pages/Register.jsx';
+import { HelmetProvider } from 'react-helmet-async';
+import AuthProvider from './Provider/AuthProvider.jsx';
+import Login from './Pages/Login.jsx';
+import Error from './Pages/Error.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>, 
-    errorElement: <div><Link to={'/'} className="btn">Button</Link> </div>,
+    element: <MainLayout />,
+    errorElement: <Error/>,
     children: [
       {
         path: "/",
@@ -22,11 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/register',
-        // element: <Register /> 
+        element: <Register />
       },
       {
         path: '/login',
-        // element:  <Login /> 
+        element:  <Login /> 
       },
     ]
 
@@ -36,6 +41,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </HelmetProvider>
   </StrictMode>,
 )

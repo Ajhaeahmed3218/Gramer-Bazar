@@ -9,6 +9,16 @@ const MainLayout = () => {
                 <Navbar/>
                 <Outlet/>
             </div>
+
+
+
+
+
+
+
+
+
+
         </div>
     );
 };
