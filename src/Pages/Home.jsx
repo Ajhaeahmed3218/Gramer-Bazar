@@ -21,7 +21,7 @@ const Home = () => {
         category: select2,
         priceRange: select3,
         sortBy: select4,
-        
+
     }
 
 
@@ -38,16 +38,18 @@ const Home = () => {
         });
 
         axios.get('http://localhost:5000/allProduct', { params })
-        .then(response => {
-            setproducts(response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-
-
+            .then(response => {
+                setproducts(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+            setSearchText('')   
+            setSelect2('')
+            setSelect3('')
+            setSelect4('')
     }
-    
+
     // GET ALLPRODUCTS
 
     useEffect(() => {
@@ -124,6 +126,7 @@ const Home = () => {
                             <option value="Ghee">Ghee</option>
                             <option value="honey">Honey</option>
                             <option value="masala">Masala</option>
+                            <option value="Yogurt">Yogurt</option>
 
                         </select>
 
@@ -284,60 +287,11 @@ const Home = () => {
                                     // timeZoneName: 'short'
                                 })}
                             </p>
-                            <div className="mt-2 flex items-center gap-2">
-                                <div className="flex items-center">
-                                    <svg
-                                        className="h-4 w-4 text-yellow-400"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                    </svg>
+                            <div className="mt-2 flex items-center gap-4">
+                                <p className="font-bold">Ratings : </p>
 
-                                    <svg
-                                        className="h-4 w-4 text-yellow-400"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                    </svg>
-
-                                    <svg
-                                        className="h-4 w-4 text-yellow-400"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                    </svg>
-
-                                    <svg
-                                        className="h-4 w-4 text-yellow-400"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                    </svg>
-
-                                    <svg
-                                        className="h-4 w-4 text-yellow-400"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path d="M13.8 4.2a2 2 0 0 0-3.6 0L8.4 8.4l-4.6.3a2 2 0 0 0-1.1 3.5l3.5 3-1 4.4c-.5 1.7 1.4 3 2.9 2.1l3.9-2.3 3.9 2.3c1.5 1 3.4-.4 3-2.1l-1-4.4 3.4-3a2 2 0 0 0-1.1-3.5l-4.6-.3-1.8-4.2Z" />
-                                    </svg>
-                                </div>
-
-                                <span className="text-sm text-gray-500 dark:text-gray-400">{product.ratings}</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-400 font-bold">{product.ratings}</span>
+                                <p className="font-bold">Category : <span className="font-semibold">{product.category}</span> </p>
                             </div>
 
                             <div className="mt-4 mb-4 flex items-center justify-between">
