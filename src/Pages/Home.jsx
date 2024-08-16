@@ -1,11 +1,31 @@
 import { useEffect, useState } from "react";
 import Banner from "../Components/Banner";
 import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 
 const Home = () => {
 
     const [products, setproducts] = useState([]);
+   
+    // Pagination data 
+    const {count} = useLoaderData()
+    const [itemsPerPage, isetItemsPerPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
+    const numberOfPages = Math.ceil(count / itemsPerPage)
+    const pages = [...Array(numberOfPages).keys()]
+
+    const handlePervPage =  () => {
+        if (currentPage > 0 ) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+    const handleNextPage =  () => {
+        if (currentPage < 0 ) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+    console.log(pages);
 
     // State for managing form inputs
     const [searchText, setSearchText] = useState('');
@@ -163,7 +183,7 @@ const Home = () => {
                 </div>
             </section>
 
-
+            {/* All CARDS MAP HERE  */}
             <section className="grid lg:grid-cols-4 grid-cols-1 container mx-auto gap-4 ">
                 {
                     products.map(product => <div key={product._id} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
@@ -336,16 +356,17 @@ const Home = () => {
             </section>
 
             <section className="flex justify-center mt-10">
-                <div className="join">
-                    <input
-                        className="join-item btn btn-square"
-                        type="radio"
-                        name="options"
-                        aria-label="1"
-                        defaultChecked />
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="2" />
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="3" />
-                    <input className="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                {/* <p>cuttent page {currentPage}</p> */}
+                <div className="flex flex-wrap justify-center gap-4">
+                    <button onClick={handlePervPage} className="btn">Perv</button>
+                   {
+                    pages.map(page => <button 
+                        onClick={() => setCurrentPage(page)}
+                        key={page} 
+                        className={currentPage === page ? "btn bg-gradient-to-r from-red-500 to-orange-500" : "btn bg-slate-50"}
+                        >{page}</button>)
+                   }
+                    <button className="btn">Next</button>
                 </div>
             </section>
 
