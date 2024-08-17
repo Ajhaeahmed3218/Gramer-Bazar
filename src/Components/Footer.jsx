@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-base-200 text-base-content p-10">
+            <footer className="footer  text-base-content p-8">
                 <aside className="max-w-[600px]">
                     <Link to={'/'} className="flex justify-center items-center gap-1 text-xl "><FaHome className="lg:text-3xl text-[#fc6934]" /><div className="lg:font-bold font-semibold lg:text-2xl">Gramer<span className="text-[#fc6934]">Bazar</span></div></Link>
                     <p className="text-[16px]">

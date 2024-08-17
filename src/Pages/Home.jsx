@@ -367,7 +367,7 @@ const Home = () => {
 
             </section>
 
-            <section className="flex justify-center mt-10">
+            <section className="flex justify-center mt-10 lg:mb-16">
                 {/* <p>cuttent page {currentPage}</p> */}
                 <div className="flex flex-wrap justify-center gap-4">
                     <button onClick={handlePervPage} className="btn">Perv</button>
