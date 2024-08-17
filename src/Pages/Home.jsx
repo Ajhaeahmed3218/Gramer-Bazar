@@ -2,27 +2,28 @@ import { useEffect, useState } from "react";
 import Banner from "../Components/Banner";
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const Home = () => {
 
     const [products, setproducts] = useState([]);
-   
+
     // Pagination data 
-    const {count} = useLoaderData()
-    const [itemsPerPage, isetItemsPerPage] = useState(1);
+    const { count } = useLoaderData()
+    const [itemsPerPage, isetItemsPerPage] = useState(8);
     const [currentPage, setCurrentPage] = useState(0);
     const numberOfPages = Math.ceil(count / itemsPerPage)
     const pages = [...Array(numberOfPages).keys()]
 
-    const handlePervPage =  () => {
-        if (currentPage > 0 ) {
+    const handlePervPage = () => {
+        if (currentPage > 0) {
             setCurrentPage(currentPage - 1)
         }
     }
-    const handleNextPage =  () => {
-        if (currentPage < 0 ) {
-            setCurrentPage(currentPage - 1)
+    const handleNextPage = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
         }
     }
     console.log(pages);
@@ -41,6 +42,8 @@ const Home = () => {
         category: select2,
         priceRange: select3,
         sortBy: select4,
+        page: currentPage,
+        size: itemsPerPage
 
     }
 
@@ -57,36 +60,44 @@ const Home = () => {
             select4
         });
 
-        axios.get('http://localhost:5000/allProduct', { params })
+        axios.get('https://gramer-bazar-server.vercel.app/allProduct', { params })
             .then(response => {
                 setproducts(response.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-            setSearchText('')   
-            setSelect2('')
-            setSelect3('')
-            setSelect4('')
+        setSearchText('')
+        setSelect2('')
+        setSelect3('')
+        setSelect4('')
+        setBrand('')
+        // isetItemsPerPage(products.length)
+        // console.log(products.length);
     }
 
     // GET ALLPRODUCTS
 
     useEffect(() => {
-        axios.get('http://localhost:5000/allProduct', { params })
+        axios.get('https://gramer-bazar-server.vercel.app/allProduct', { params })
             .then(response => {
                 setproducts(response.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, []);
 
-    console.log(products);
+    }, [currentPage]);
+
+    // console.log(products);
 
     return (
         <div className="bg-[#eeeeee]">
-
+            <Helmet>
+                <title>
+                    GramerBazar | Home
+                </title>
+            </Helmet>
             <Banner />
 
             {/* Searching, Categorization and Sorting */}
@@ -126,10 +137,11 @@ const Home = () => {
                             <option value="" disabled>Choose a Band </option>
                             {/* <option value="">All Brand</option> */}
                             <option value="">All</option>
+                            <option value="Ghorer Bazar">Ghorer Bazar</option>
                             <option value="Pran">Pran</option>
                             <option value="Aarong">Arong</option>
                             <option value="Food BD">BDFoods</option>
-                            <option value="Ghorer Bazar">Ghorer Bazar</option>
+
 
                         </select>
 
@@ -145,7 +157,7 @@ const Home = () => {
                             <option value="Oil">Oil</option>
                             <option value="Ghee">Ghee</option>
                             <option value="honey">Honey</option>
-                            <option value="masala">Masala</option>
+                            <option value="Masala">Masala</option>
                             <option value="Yogurt">Yogurt</option>
 
                         </select>
@@ -178,7 +190,7 @@ const Home = () => {
                             <option value="CA">High to Low</option>
 
                         </select>
-                        <button onClick={handleSubmit} className="lg:w-[400px] bg-[#fc6934] rounded-md lg:py-0 py-2 ">submit</button>
+                        <button onClick={handleSubmit} className="lg:w-[400px] bg-[#fc6934] rounded-md lg:py-0 py-2 ">Search</button>
                     </form>
                 </div>
             </section>
@@ -359,14 +371,14 @@ const Home = () => {
                 {/* <p>cuttent page {currentPage}</p> */}
                 <div className="flex flex-wrap justify-center gap-4">
                     <button onClick={handlePervPage} className="btn">Perv</button>
-                   {
-                    pages.map(page => <button 
-                        onClick={() => setCurrentPage(page)}
-                        key={page} 
-                        className={currentPage === page ? "btn bg-gradient-to-r from-red-500 to-orange-500" : "btn bg-slate-50"}
-                        >{page}</button>)
-                   }
-                    <button className="btn">Next</button>
+                    {
+                        pages.map(page => <button
+                            onClick={() => setCurrentPage(page)}
+                            key={page}
+                            className={currentPage === page ? "btn bg-gradient-to-r from-red-500 to-orange-500" : "btn bg-slate-50"}
+                        >{page + 1}</button>)
+                    }
+                    <button onClick={handleNextPage} className="btn">Next</button>
                 </div>
             </section>
 

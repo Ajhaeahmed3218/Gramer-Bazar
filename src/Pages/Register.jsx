@@ -77,7 +77,7 @@ const Register = () => {
         <div className="container mx-auto">
              <Helmet>
                 <title>
-                    go2Trip | Register
+                    GramerBazar | Register
                 </title>
             </Helmet>
             <h1 className="text-4xl text-center font-bold mt-6">Register Now</h1>

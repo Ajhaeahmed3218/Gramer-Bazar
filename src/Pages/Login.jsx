@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { FaGoogle } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -94,6 +95,11 @@ const Login = () => {
 
     return (
         <div className="md:w-2/5 mx-auto border-2 mt-20 mb-32  p-10 rounded-xl">
+            <Helmet>
+                <title>
+                    GramerBazar | Login
+                </title>
+            </Helmet>
             <h1 className="text-4xl text-center font-bold p-12">Login</h1>
             <div className=" ">
                 <form onSubmit={handleSignin} className="card-body">
